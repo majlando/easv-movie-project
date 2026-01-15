@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="dk.easv.movie.gui.MainController"
+            stylesheets="@styles.css" styleClass="root-pane">
+
+    <!-- Header with title and filter controls -->
+    <top>
+        <VBox styleClass="header-section">
+            <padding><Insets top="16" right="20" bottom="16" left="20"/></padding>
+            <spacing>12</spacing>
+
+            <!-- Title row -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="Private Movie Collection" styleClass="app-title"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnAddMovie" text="+ Add Movie" styleClass="accent-button" onAction="#onAddMovie"/>
+            </HBox>
+
+            <!-- Filter row -->
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="filter-bar">
+                <TextField fx:id="txtSearch" promptText="Search movies..." prefWidth="220"
+                           styleClass="search-field" onKeyReleased="#onSearchKeyReleased"/>
+
+                <Separator orientation="VERTICAL" styleClass="filter-separator"/>
+
+                <Label text="Genre:" styleClass="filter-label"/>
+                <ComboBox fx:id="cmbGenreFilter" prefWidth="150" onAction="#onFilterChanged"/>
+
+                <Label text="Min Rating:" styleClass="filter-label"/>
+                <Spinner fx:id="spnMinRating" prefWidth="90" styleClass="compact-spinner"/>
+
+                <Separator orientation="VERTICAL" styleClass="filter-separator"/>
+
+                <Label text="Sort:" styleClass="filter-label"/>
+                <ComboBox fx:id="cmbSortBy" prefWidth="140" onAction="#onSortChanged"/>
+                <CheckBox fx:id="chkAscending" text="Asc" selected="true" onAction="#onSortChanged"/>
+
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnClearFilters" text="Clear Filters" styleClass="text-button" onAction="#onClearFilters"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Main content area -->
+    <center>
+        <SplitPane dividerPositions="0.22" styleClass="main-split">
+            <padding><Insets top="0" right="0" bottom="0" left="0"/></padding>
+
+            <!-- Left panel: Categories -->
+            <VBox styleClass="panel categories-panel">
+                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                <spacing>12</spacing>
+
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="Categories" styleClass="panel-title"/>
+                    <Pane HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="btnAddCategory" text="+" styleClass="icon-button" onAction="#onAddCategory"/>
+                </HBox>
+
+                <ListView fx:id="lstCategories" VBox.vgrow="ALWAYS" styleClass="category-list"/>
+
+                <HBox spacing="8" alignment="CENTER">
+                    <Button fx:id="btnEditCategory" text="Edit" styleClass="small-secondary" onAction="#onEditCategory"/>
+                    <Button fx:id="btnDeleteCategory" text="Delete" styleClass="small-danger" onAction="#onDeleteCategory"/>
+                </HBox>
+            </VBox>
+
+            <!-- Right panel: Movies -->
+            <VBox styleClass="panel movies-panel">
+                <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+                <spacing>12</spacing>
+
+                <Label text="Movies" styleClass="panel-title"/>
+
+                <TableView fx:id="tblMovies" VBox.vgrow="ALWAYS" styleClass="movie-table"
+                           onMouseClicked="#onMovieClicked">
+                    <columns>
+                        <TableColumn fx:id="colTitle" text="Title" prefWidth="280" minWidth="150"/>
+                        <TableColumn fx:id="colCategories" text="Categories" prefWidth="220" minWidth="100"/>
+                        <TableColumn fx:id="colImdb" text="IMDB" prefWidth="70" minWidth="60"/>
+                        <TableColumn fx:id="colPersonal" text="Personal" prefWidth="80" minWidth="70"/>
+                        <TableColumn fx:id="colLastView" text="Last Viewed" prefWidth="100" minWidth="80"/>
+                    </columns>
+                </TableView>
+
+                <!-- Movie actions bar -->
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="action-bar">
+                    <Label text="Rate:" styleClass="field-label"/>
+                    <Spinner fx:id="spnPersonalRating" prefWidth="100" styleClass="compact-spinner"/>
+                    <Button fx:id="btnSaveRating" text="Save" styleClass="small-primary" onAction="#onSetPersonalRating"/>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+
+                    <Button fx:id="btnPlayMovie" text="Play" styleClass="primary-button" onAction="#onPlayMovie"/>
+                    <Button fx:id="btnEditMovie" text="Edit" styleClass="secondary-button" onAction="#onEditMovie"/>
+                    <Button fx:id="btnDeleteMovie" text="Delete" styleClass="danger-button" onAction="#onDeleteMovie"/>
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+
+    <!-- Footer status bar -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding><Insets top="8" right="20" bottom="8" left="20"/></padding>
+            <Label fx:id="lblStatus" text="" styleClass="status-text"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblMovieCount" text="0 movies" styleClass="movie-count"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

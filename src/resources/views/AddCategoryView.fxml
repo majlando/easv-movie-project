@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dk.easv.movie.gui.AddCategoryController"
+      styleClass="dialog-container" stylesheets="@styles.css"
+      prefWidth="380" prefHeight="180">
+    <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+    <spacing>20</spacing>
+
+    <!-- Dialog header -->
+    <Label fx:id="lblTitle" text="Add Category" styleClass="dialog-title"/>
+
+    <!-- Form content -->
+    <VBox spacing="6" VBox.vgrow="ALWAYS">
+        <Label text="Category Name" styleClass="form-label"/>
+        <TextField fx:id="txtName" promptText="Enter category name" styleClass="form-input"/>
+    </VBox>
+
+    <!-- Dialog buttons -->
+    <HBox spacing="12" alignment="CENTER_RIGHT" styleClass="dialog-buttons">
+        <Button text="Cancel" styleClass="secondary-button" cancelButton="true" onAction="#onCancel"/>
+        <Button fx:id="btnSave" text="Save" styleClass="primary-button" defaultButton="true" onAction="#onSave"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dk.easv.movie.gui.AddMovieController"
+      styleClass="dialog-container" stylesheets="@styles.css"
+      prefWidth="520" prefHeight="480">
+    <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+    <spacing>20</spacing>
+
+    <!-- Dialog header -->
+    <Label fx:id="lblTitle" text="Add Movie" styleClass="dialog-title"/>
+
+    <!-- Form content -->
+    <VBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- Title field -->
+        <VBox spacing="6">
+            <Label text="Movie Title" styleClass="form-label"/>
+            <TextField fx:id="txtName" promptText="Enter movie title" styleClass="form-input"/>
+        </VBox>
+
+        <!-- File selection -->
+        <VBox spacing="6">
+            <Label text="Movie File" styleClass="form-label"/>
+            <HBox spacing="10">
+                <TextField fx:id="txtFileLink" promptText="Select movie file..." HBox.hgrow="ALWAYS"
+                           styleClass="form-input" editable="false"/>
+                <Button text="Browse" styleClass="secondary-button" onAction="#onBrowseFile"/>
+            </HBox>
+        </VBox>
+
+        <!-- Ratings row -->
+        <HBox spacing="24">
+            <!-- IMDB Rating -->
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="IMDB Rating" styleClass="form-label"/>
+                <Spinner fx:id="spnImdbRating" maxWidth="Infinity" styleClass="form-spinner"/>
+            </VBox>
+
+            <!-- Personal Rating -->
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label text="Personal Rating" styleClass="form-label"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Spinner fx:id="spnPersonalRating" prefWidth="100" styleClass="form-spinner"/>
+                    <CheckBox fx:id="chkNoPersonalRating" text="Skip" selected="true"
+                              onAction="#onNoPersonalRatingChanged" styleClass="form-checkbox"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- Categories -->
+        <VBox spacing="6" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Categories" styleClass="form-label"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Label text="Ctrl+Click for multiple" styleClass="hint-text"/>
+            </HBox>
+            <ListView fx:id="lstCategories" VBox.vgrow="ALWAYS" styleClass="form-list"/>
+        </VBox>
+    </VBox>
+
+    <!-- Dialog buttons -->
+    <HBox spacing="12" alignment="CENTER_RIGHT" styleClass="dialog-buttons">
+        <Button text="Cancel" styleClass="secondary-button" cancelButton="true" onAction="#onCancel"/>
+        <Button fx:id="btnSave" text="Save Movie" styleClass="primary-button" defaultButton="true" onAction="#onSave"/>
+    </HBox>
+
+</VBox>
