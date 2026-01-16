@@ -17,7 +17,7 @@ A JavaFX desktop application for managing a personal movie collection with MS SQ
 GUI Layer (gui)          → JavaFX Controllers & FXML Views
 Business Logic (bll)     → Managers & Services
 Data Access Layer (dal)  → DAOs & Database Connection
-Business Entities (be)   → Movie, Category POJOs
+Business Entities (be)   → Movie, Category
 ```
 
 ## Prerequisites
